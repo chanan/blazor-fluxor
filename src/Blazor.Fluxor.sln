@@ -15,6 +15,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CounterSample.Server", "..\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CounterSample.Shared", "..\samples\CounterSample\CounterSample\CounterSample.Shared\CounterSample.Shared.csproj", "{A8BA04DB-4C96-4CDD-BEDC-A276E9677175}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blazor.Fluxor.Extensions.Microsoft.DependencyInjection", "Blazor.Fluxor.Extensions.Microsoft.DependencyInjection\Blazor.Fluxor.Extensions.Microsoft.DependencyInjection.csproj", "{8CD6B162-301A-48DE-95FE-904DF57CD2BE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -37,6 +39,10 @@ Global
 		{A8BA04DB-4C96-4CDD-BEDC-A276E9677175}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A8BA04DB-4C96-4CDD-BEDC-A276E9677175}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A8BA04DB-4C96-4CDD-BEDC-A276E9677175}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8CD6B162-301A-48DE-95FE-904DF57CD2BE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8CD6B162-301A-48DE-95FE-904DF57CD2BE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8CD6B162-301A-48DE-95FE-904DF57CD2BE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8CD6B162-301A-48DE-95FE-904DF57CD2BE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
