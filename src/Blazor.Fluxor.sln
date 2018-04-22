@@ -3,7 +3,17 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27617.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blazor.Fluxor", "Blazor.Fluxor\Blazor.Fluxor.csproj", "{4BB37B69-EA1B-4764-AE0D-3CD5CCF3C83D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Blazor.Fluxor", "Blazor.Fluxor\Blazor.Fluxor.csproj", "{4BB37B69-EA1B-4764-AE0D-3CD5CCF3C83D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Samples", "Samples", "{1A6663AC-4F1F-40AD-8D03-0B0977ED466D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "01-Counter", "01-Counter", "{9C7874FB-31FD-422C-8D7D-21978D77C50B}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CounterSample.Client", "..\samples\CounterSample\CounterSample\CounterSample.Client\CounterSample.Client.csproj", "{434AB15D-D22E-4AEC-8D83-725F1418CCFA}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CounterSample.Server", "..\samples\CounterSample\CounterSample\CounterSample.Server\CounterSample.Server.csproj", "{23B5506B-A08F-442D-843E-A97DF85E389F}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CounterSample.Shared", "..\samples\CounterSample\CounterSample\CounterSample.Shared\CounterSample.Shared.csproj", "{A8BA04DB-4C96-4CDD-BEDC-A276E9677175}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,9 +25,27 @@ Global
 		{4BB37B69-EA1B-4764-AE0D-3CD5CCF3C83D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4BB37B69-EA1B-4764-AE0D-3CD5CCF3C83D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4BB37B69-EA1B-4764-AE0D-3CD5CCF3C83D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{434AB15D-D22E-4AEC-8D83-725F1418CCFA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{434AB15D-D22E-4AEC-8D83-725F1418CCFA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{434AB15D-D22E-4AEC-8D83-725F1418CCFA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{434AB15D-D22E-4AEC-8D83-725F1418CCFA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{23B5506B-A08F-442D-843E-A97DF85E389F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{23B5506B-A08F-442D-843E-A97DF85E389F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{23B5506B-A08F-442D-843E-A97DF85E389F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{23B5506B-A08F-442D-843E-A97DF85E389F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A8BA04DB-4C96-4CDD-BEDC-A276E9677175}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A8BA04DB-4C96-4CDD-BEDC-A276E9677175}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A8BA04DB-4C96-4CDD-BEDC-A276E9677175}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A8BA04DB-4C96-4CDD-BEDC-A276E9677175}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{9C7874FB-31FD-422C-8D7D-21978D77C50B} = {1A6663AC-4F1F-40AD-8D03-0B0977ED466D}
+		{434AB15D-D22E-4AEC-8D83-725F1418CCFA} = {9C7874FB-31FD-422C-8D7D-21978D77C50B}
+		{23B5506B-A08F-442D-843E-A97DF85E389F} = {9C7874FB-31FD-422C-8D7D-21978D77C50B}
+		{A8BA04DB-4C96-4CDD-BEDC-A276E9677175} = {9C7874FB-31FD-422C-8D7D-21978D77C50B}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {B1F2E0DF-C651-48A3-83E3-3B77D34EC3A2}

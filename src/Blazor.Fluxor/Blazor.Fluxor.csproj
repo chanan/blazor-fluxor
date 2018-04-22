@@ -16,4 +16,8 @@
     <Version>0.0.1-alpha-0001</Version>
   </PropertyGroup>
 
+  <ItemGroup>
+    <None Remove="0xmmtnuo.lzb~" />
+  </ItemGroup>
+
 </Project>
