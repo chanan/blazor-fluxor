@@ -17,6 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\..\..\src\Blazor.Fluxor.Extensions.Microsoft.DependencyInjection\Blazor.Fluxor.Extensions.Microsoft.DependencyInjection.csproj" />
     <ProjectReference Include="..\..\..\..\src\Blazor.Fluxor\Blazor.Fluxor.csproj" />
     <ProjectReference Include="..\CounterSample.Shared\CounterSample.Shared.csproj" />
   </ItemGroup>
