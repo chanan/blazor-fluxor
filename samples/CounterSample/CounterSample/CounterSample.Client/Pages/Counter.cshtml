@@ -1,16 +1,20 @@
 ﻿@page "/counter"
+@using Blazor.Fluxor
+@using CounterSample.Client.Store.Counter
+@using CounterSample.Client.Store.Counter.Actions
+@inject IStore Store
+@inject IFeature<CounterState> Feature
 
 <h1>Counter</h1>
 
-<p>Current count: @currentCount</p>
+<p>Current count: @Feature.State?.Value</p>
 
 <button class="btn btn-primary" onclick="@IncrementCount">Click me</button>
 
 @functions {
-    int currentCount = 0;
 
-    void IncrementCount()
-    {
-        currentCount++;
-    }
+void IncrementCount()
+{
+    Store.Dispatch(new IncrementCounterAction());
+}
 }

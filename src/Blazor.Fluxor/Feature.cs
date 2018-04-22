@@ -14,6 +14,7 @@ namespace Blazor.Fluxor
 		private readonly Dictionary<Type, List<Object>> ReducersByActionType = new Dictionary<Type, List<Object>>();
 
 		protected abstract void RegisterReducers();
+		protected abstract TState GetInitialState();
 
 		public TState State { get; private set; }
 
@@ -21,6 +22,7 @@ namespace Blazor.Fluxor
 		{
 			store.RegisterFeature(this);
 			RegisterReducers();
+			State = GetInitialState();
 		}
 
 		internal override void Dispatch<TAction>(TAction action)
