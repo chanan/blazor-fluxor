@@ -1,7 +1,12 @@
 ﻿namespace Blazor.Fluxor
 {
-    public interface IReducer<TState, TAction>
-    {
+	public interface IReducer
+	{
+
+	}
+
+	public interface IReducer<TState, TAction>: IReducer
+	{
 		TState Reduce(TAction action, TState state);
-    }
+	}
 }

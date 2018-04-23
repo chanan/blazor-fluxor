@@ -5,6 +5,6 @@ namespace Blazor.Fluxor
 	public interface IStore
 	{
 		void Dispatch<TAction>(TAction action);
-		void RegisterFeature(Feature feature);
+		void RegisterFeature(IFeature feature);
 	}
 }
