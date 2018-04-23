@@ -21,4 +21,9 @@
     <ProjectReference Include="..\WeatherForecastSample.Shared\WeatherForecastSample.Shared.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Store\FetchData\Effects\" />
+    <Folder Include="Store\FetchData\Reducers\" />
+  </ItemGroup>
+
 </Project>

@@ -1,6 +1,10 @@
 ﻿@using WeatherForecastSample.Shared
 @page "/fetchdata"
-@inject HttpClient Http
+@using Blazor.Fluxor
+@using Store.FetchData
+@using Store.FetchData.Actions
+@inject IStore Store
+@inject IFeature<FetchDataState> Feature
 
 <h1>Weather forecast</h1>
 
@@ -8,7 +12,7 @@
 
 <p>This component demonstrates fetching data from the server.</p>
 
-@if (forecasts == null)
+@if (Feature.State.Forecasts == null)
 {
     <p><em>Loading...</em></p>
 }
@@ -24,7 +28,7 @@ else
             </tr>
         </thead>
         <tbody>
-            @foreach (var forecast in forecasts)
+            @foreach (var forecast in Feature.State.Forecasts)
             {
                 <tr>
                     <td>@forecast.Date.ToShortDateString()</td>
@@ -38,10 +42,8 @@ else
 }
 
 @functions {
-    WeatherForecast[] forecasts;
-
-    protected override async Task OnInitAsync()
-    {
-        forecasts = await Http.GetJsonAsync<WeatherForecast[]>("/api/SampleData/WeatherForecasts");
-    }
+protected override void OnInit()
+{
+    Store.Dispatch(new GetForecastDataAction());
+}
 }
