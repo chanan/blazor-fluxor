@@ -4,28 +4,38 @@ using System.Linq;
 
 namespace Blazor.Fluxor
 {
-	public abstract class Feature
+	public abstract class Feature<TState> : IFeature<TState>
 	{
-		internal abstract void Dispatch<TAction>(TAction action);
-	}
-
-	public abstract class Feature<TState> : Feature, IFeature<TState>
-	{
+		public TState State { get; private set; }
+		protected abstract TState GetInitialState();
 		private readonly Dictionary<Type, List<Object>> ReducersByActionType = new Dictionary<Type, List<Object>>();
 
-		protected abstract void RegisterReducers();
-		protected abstract TState GetInitialState();
-
-		public TState State { get; private set; }
-
-		public Feature(IStore store)
+		public Feature()
 		{
-			store.RegisterFeature(this);
-			RegisterReducers();
 			State = GetInitialState();
 		}
 
-		internal override void Dispatch<TAction>(TAction action)
+		public void AddReducer<TAction>(IReducer<TState, TAction> reducer)
+		{
+			AddReducer(reducer, typeof(TAction));
+		}
+		
+		public void AddReducer(IReducer reducer, Type actionType)
+		{
+			if (reducer == null)
+				throw new ArgumentNullException(nameof(reducer));
+			if (actionType == null)
+				throw new ArgumentNullException(nameof(actionType));
+
+			if (!ReducersByActionType.TryGetValue(actionType, out List<object> reducers))
+			{
+				reducers = new List<object>();
+				ReducersByActionType[actionType] = reducers;
+			}
+			reducers.Add(reducer);
+		}
+
+		public void ReceiveDispatchNotificationFromStore<TAction>(TAction action)
 		{
 			if (action == null)
 				throw new ArgumentNullException(nameof(action));
@@ -36,23 +46,10 @@ namespace Blazor.Fluxor
 			{
 				foreach (IReducer<TState, TAction> currentReducer in reducers)
 				{
-					newState = currentReducer.Reduce(action, newState);
+					newState = currentReducer.Reduce(newState, action);
 				}
 			}
 			State = newState;
-		}
-
-		protected void RegisterReducer<TAction>(IReducer<TState, TAction> reducer)
-		{
-			if (reducer == null)
-				throw new ArgumentNullException(nameof(reducer));
-
-			if (!ReducersByActionType.TryGetValue(typeof(TAction), out List<object> reducers))
-			{
-				reducers = new List<object>();
-				ReducersByActionType[typeof(TAction)] = reducers;
-			}
-			reducers.Add(reducer);
 		}
 
 		private IEnumerable<IReducer<TState, TAction>> GetReducersForAction<TAction>()
