@@ -29,7 +29,7 @@ namespace Blazor.Fluxor
 				.Select(t => new
 				{
 					FeatureType = t,
-					GenericParameterTypes = TypeExtensions.GetGenericParametersForSpecificGenericType(t, typeof(Feature<>))
+					GenericParameterTypes = TypeHelper.GetGenericParametersForSpecificGenericType(t, typeof(Feature<>))
 				})
 				.Where(x => x.GenericParameterTypes != null)
 				.ToList();

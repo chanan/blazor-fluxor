@@ -2,7 +2,7 @@
 
 namespace Blazor.Fluxor
 {
-	internal static class TypeExtensions
+	internal static class TypeHelper
 	{
 		internal static Type[] GetGenericParametersForSpecificGenericType(Type implementingType, Type requiredGenericType)
 		{
