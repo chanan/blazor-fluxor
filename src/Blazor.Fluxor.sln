@@ -9,11 +9,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Samples", "Samples", "{1A66
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "01-Counter", "01-Counter", "{9C7874FB-31FD-422C-8D7D-21978D77C50B}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CounterSample.Client", "..\samples\CounterSample\CounterSample\CounterSample.Client\CounterSample.Client.csproj", "{434AB15D-D22E-4AEC-8D83-725F1418CCFA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CounterSample.Client", "..\samples\01-CounterSample\CounterSample\CounterSample.Client\CounterSample.Client.csproj", "{434AB15D-D22E-4AEC-8D83-725F1418CCFA}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CounterSample.Server", "..\samples\CounterSample\CounterSample\CounterSample.Server\CounterSample.Server.csproj", "{23B5506B-A08F-442D-843E-A97DF85E389F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CounterSample.Server", "..\samples\01-CounterSample\CounterSample\CounterSample.Server\CounterSample.Server.csproj", "{23B5506B-A08F-442D-843E-A97DF85E389F}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CounterSample.Shared", "..\samples\CounterSample\CounterSample\CounterSample.Shared\CounterSample.Shared.csproj", "{A8BA04DB-4C96-4CDD-BEDC-A276E9677175}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CounterSample.Shared", "..\samples\01-CounterSample\CounterSample\CounterSample.Shared\CounterSample.Shared.csproj", "{A8BA04DB-4C96-4CDD-BEDC-A276E9677175}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
