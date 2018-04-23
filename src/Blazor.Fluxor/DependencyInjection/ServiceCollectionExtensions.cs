@@ -15,7 +15,6 @@ namespace Blazor.Fluxor
 				throw new ArgumentNullException(nameof(assembliesToParse));
 
 			DiscoverReducers(serviceCollection, assembliesToParse, out IEnumerable<DiscoveredReducerInfo> discoveredReducerInfos);
-			Console.WriteLine("Number of reducers found " + discoveredReducerInfos.Count());
 			DiscoverFeatures(serviceCollection, assembliesToParse, discoveredReducerInfos);
 			RegisterStore(serviceCollection);
 			return serviceCollection;
@@ -34,7 +33,7 @@ namespace Blazor.Fluxor
 				.Select(t => new
 				{
 					ImplementingType = t,
-					GenericParameterTypes = TypeHelper.GetGenericParametersForSpecificGenericType(t, typeof(IReducer<,>))
+					GenericParameterTypes = TypeHelper.GetGenericParametersForImplementedInterface(t, typeof(IReducer<,>))
 				})
 				.Where(x => x.GenericParameterTypes != null)
 				.Select(x => new DiscoveredReducerInfo(
@@ -47,35 +46,6 @@ namespace Blazor.Fluxor
 			{
 				RegisterReducer(serviceCollection, discoveredReducerInfo);
 			}
-		}
-
-		private static void RegisterFeature(IServiceCollection serviceCollection,
-			DiscoveredFeatureInfo discoveredFeatureInfo, IEnumerable<DiscoveredReducerInfo> discoveredFeatureInfosForFeatureState)
-		{
-			// Register the implementing type so we can get an instance from the service provider
-			serviceCollection.AddScoped(discoveredFeatureInfo.ImplementingType);
-
-			// Register a factory for creating instance of this feature type when requested via the generic IFeature interface
-			serviceCollection.AddScoped(discoveredFeatureInfo.FeatureInterfaceGenericType, serviceProvider =>
-			{
-				// Create an instance of the implementing type
-				IFeature featureInstance = (IFeature)serviceProvider.GetService(discoveredFeatureInfo.ImplementingType);
-
-				if (discoveredFeatureInfosForFeatureState != null)
-				{
-					foreach (DiscoveredReducerInfo reducerInfo in discoveredFeatureInfosForFeatureState)
-					{
-						IReducer reducerForFeature = (IReducer)serviceProvider.GetService(reducerInfo.ImplementingType);
-						featureInstance.AddReducer(reducerForFeature, reducerInfo.ActionType);
-					}
-				}
-
-				// Automatically add this feature to the store
-				IStore store = serviceProvider.GetService<IStore>();
-				store.AddFeature(featureInstance);
-
-				return featureInstance;
-			});
 		}
 
 		private static void RegisterReducer(IServiceCollection serviceCollection, DiscoveredReducerInfo discoveredReducerInfo)
@@ -97,7 +67,7 @@ namespace Blazor.Fluxor
 				.Select(t => new
 				{
 					ImplementingType = t,
-					GenericParameterTypes = TypeHelper.GetGenericParametersForSpecificGenericType(t, typeof(Feature<>))
+					GenericParameterTypes = TypeHelper.GetGenericParametersForImplementedInterface(t, typeof(IFeature<>))
 				})
 				.Where(x => x.GenericParameterTypes != null)
 				.Select(x => new DiscoveredFeatureInfo(
@@ -119,6 +89,37 @@ namespace Blazor.Fluxor
 					discoveredFeatureInfosForFeatureState: discoveredFeatureInfosForFeatureState);
 			}
 		}
+
+		private static void RegisterFeature(IServiceCollection serviceCollection,
+			DiscoveredFeatureInfo discoveredFeatureInfo, IEnumerable<DiscoveredReducerInfo> discoveredFeatureInfosForFeatureState)
+		{
+			// Register the implementing type so we can get an instance from the service provider
+			serviceCollection.AddScoped(discoveredFeatureInfo.ImplementingType);
+
+			// Register a factory for creating instance of this feature type when requested via the generic IFeature interface
+			serviceCollection.AddScoped(discoveredFeatureInfo.FeatureInterfaceGenericType, serviceProvider =>
+			{
+				// Create an instance of the implementing type
+				IFeature featureInstance = (IFeature)serviceProvider.GetService(discoveredFeatureInfo.ImplementingType);
+
+				if (discoveredFeatureInfosForFeatureState != null)
+				{
+					foreach (DiscoveredReducerInfo reducerInfo in discoveredFeatureInfosForFeatureState)
+					{
+						IReducer reducerForFeature = (IReducer)serviceProvider.GetService(reducerInfo.ReducerInterfaceGenericType);
+						featureInstance.AddReducer(reducerForFeature, reducerInfo.ActionType);
+					}
+				}
+
+				// Automatically add this feature to the store
+				IStore store = serviceProvider.GetService<IStore>();
+				store.AddFeature(featureInstance);
+
+				return featureInstance;
+			});
+		}
+
+
 
 	}
 }

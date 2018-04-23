@@ -4,13 +4,16 @@ namespace Blazor.Fluxor
 {
 	internal static class TypeHelper
 	{
-		internal static Type[] GetGenericParametersForSpecificGenericType(Type implementingType, Type requiredGenericType)
+		internal static Type[] GetGenericParametersForImplementedInterface(Type implementingType, Type genericInterfaceRequired)
 		{
-			while (implementingType != null)
+			foreach(Type interfaceType in implementingType.GetInterfaces())
 			{
-				if (implementingType.IsGenericType && implementingType.GetGenericTypeDefinition() == requiredGenericType)
-					return implementingType.GetGenericArguments();
-				implementingType = implementingType.BaseType;
+				if (!interfaceType.IsGenericType)
+					continue;
+
+				Type genericTypeForInterface = interfaceType.GetGenericTypeDefinition();
+				if (genericTypeForInterface == genericInterfaceRequired)
+					return interfaceType.GetGenericArguments();
 			}
 			return null;
 		}

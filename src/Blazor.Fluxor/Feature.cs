@@ -10,9 +10,8 @@ namespace Blazor.Fluxor
 		protected abstract TState GetInitialState();
 		private readonly Dictionary<Type, List<Object>> ReducersByActionType = new Dictionary<Type, List<Object>>();
 
-		public Feature(IStore store)
+		public Feature()
 		{
-			store.AddFeature(this);
 			State = GetInitialState();
 		}
 
