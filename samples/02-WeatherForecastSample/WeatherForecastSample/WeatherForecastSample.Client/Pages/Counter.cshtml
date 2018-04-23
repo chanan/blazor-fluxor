@@ -1,0 +1,18 @@
+﻿@page "/counter"
+
+<h1>Counter</h1>
+
+<p>This page has <strong>not</strong> been Fluxorized. See Sample 1.</p>
+
+<p>Current count: @currentCount</p>
+
+<button class="btn btn-primary" onclick="@IncrementCount">Click me</button>
+
+@functions {
+    int currentCount = 0;
+
+    void IncrementCount()
+    {
+        currentCount++;
+    }
+}
