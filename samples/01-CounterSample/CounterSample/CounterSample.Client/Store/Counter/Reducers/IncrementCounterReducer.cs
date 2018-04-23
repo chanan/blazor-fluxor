@@ -7,7 +7,6 @@ namespace CounterSample.Client.Store.Counter.Reducers
 	{
 		public CounterState Reduce(CounterState state, IncrementCounterAction action)
 		{
-			state = state ?? new CounterState(0);
 			return new CounterState(state.Value + 1);
 		}
 	}

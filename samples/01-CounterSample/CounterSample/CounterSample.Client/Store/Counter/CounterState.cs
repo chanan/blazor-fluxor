@@ -2,7 +2,7 @@
 {
 	public class CounterState
 	{
-		public readonly int Value;
+		public int Value { get; private set; }
 
 		public CounterState(int value)
 		{
