@@ -12,16 +12,16 @@ namespace Blazor.Fluxor
 
 		public Feature(IStore store)
 		{
-			store.RegisterFeature(this);
+			store.AddFeature(this);
 			State = GetInitialState();
 		}
 
-		public void RegisterReducer<TAction>(IReducer<TState, TAction> reducer)
+		public void AddReducer<TAction>(IReducer<TState, TAction> reducer)
 		{
-			RegisterReducer(reducer, typeof(TAction));
+			AddReducer(reducer, typeof(TAction));
 		}
 		
-		public void RegisterReducer(IReducer reducer, Type actionType)
+		public void AddReducer(IReducer reducer, Type actionType)
 		{
 			if (reducer == null)
 				throw new ArgumentNullException(nameof(reducer));
@@ -47,7 +47,7 @@ namespace Blazor.Fluxor
 			{
 				foreach (IReducer<TState, TAction> currentReducer in reducers)
 				{
-					newState = currentReducer.Reduce(action, newState);
+					newState = currentReducer.Reduce(newState, action);
 				}
 			}
 			State = newState;

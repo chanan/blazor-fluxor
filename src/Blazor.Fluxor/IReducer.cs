@@ -7,6 +7,6 @@
 
 	public interface IReducer<TState, TAction>: IReducer
 	{
-		TState Reduce(TAction action, TState state);
+		TState Reduce(TState state, TAction action);
 	}
 }

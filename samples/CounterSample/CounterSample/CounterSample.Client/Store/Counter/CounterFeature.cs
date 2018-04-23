@@ -7,7 +7,7 @@ namespace CounterSample.Client.Store.Counter
 	{
 		public CounterFeature(IStore store) : base(store)
 		{
-			RegisterReducer(new IncrementCounterReducer());
+			AddReducer(new IncrementCounterReducer());
 		}
 
 		protected override CounterState GetInitialState() => new CounterState(0);
