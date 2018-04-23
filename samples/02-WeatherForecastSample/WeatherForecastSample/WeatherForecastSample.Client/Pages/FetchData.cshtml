@@ -42,8 +42,9 @@ else
 }
 
 @functions {
-protected override void OnInit()
-{
-    Store.Dispatch(new GetForecastDataAction());
-}
+   protected override async Task OnInitAsync()
+   {
+       await Store.Dispatch(new GetForecastDataAction());
+       StateHasChanged();
+   }
 }

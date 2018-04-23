@@ -2,7 +2,7 @@
 
 namespace WeatherForecastSample.Client.Store.FetchData.Actions
 {
-    public class GetForecastDataAction: IAction
+    public class GetForecastDataFailedAction: IAction
     {
     }
 }

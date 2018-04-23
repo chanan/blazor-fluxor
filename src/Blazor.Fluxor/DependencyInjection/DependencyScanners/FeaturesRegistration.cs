@@ -8,14 +8,14 @@ namespace Blazor.Fluxor.DependencyInjection.DependencyScanners
 {
     internal static class FeaturesRegistration
     {
-		internal static IEnumerable<DiscoveredFeatureInfo> DiscoverFeatures(IServiceCollection serviceCollection, Assembly[] assembliesToParse,
-			IEnumerable<DiscoveredReducerInfo> discoveredReducerInfos)
+		internal static IEnumerable<DiscoveredFeatureInfo> DiscoverFeatures(IServiceCollection serviceCollection, 
+			Assembly[] assembliesToScan, IEnumerable<DiscoveredReducerInfo> discoveredReducerInfos)
 		{
 			Dictionary<Type, IGrouping<Type, DiscoveredReducerInfo>> discoveredReducerInfosByStateType = discoveredReducerInfos
 				.GroupBy(x => x.StateType)
 				.ToDictionary(x => x.Key);
 
-			IEnumerable<DiscoveredFeatureInfo> discoveredFeatureInfos = assembliesToParse
+			IEnumerable<DiscoveredFeatureInfo> discoveredFeatureInfos = assembliesToScan
 				.SelectMany(asm => asm.GetTypes())
 				.Select(t => new
 				{

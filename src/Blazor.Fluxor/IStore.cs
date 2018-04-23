@@ -1,10 +1,12 @@
 ﻿using System;
+using System.Threading.Tasks;
 
 namespace Blazor.Fluxor
 {
 	public interface IStore
 	{
+		void AddEffect(Type actionType, IEffect effect);
 		void AddFeature(IFeature feature);
-		void Dispatch<TAction>(TAction action);
+		Task Dispatch(IAction action);
 	}
 }

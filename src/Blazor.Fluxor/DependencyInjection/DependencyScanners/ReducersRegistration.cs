@@ -7,9 +7,10 @@ namespace Blazor.Fluxor.DependencyInjection.DependencyScanners
 {
     internal static class ReducersRegistration
     {
-		internal static IEnumerable<DiscoveredReducerInfo> DiscoverReducers(IServiceCollection serviceCollection, Assembly[] assembliesToParse)
+		internal static IEnumerable<DiscoveredReducerInfo> DiscoverReducers(IServiceCollection serviceCollection, 
+			Assembly[] assembliesToScan)
 		{
-			IEnumerable<DiscoveredReducerInfo> discoveredReducerInfos = assembliesToParse
+			IEnumerable<DiscoveredReducerInfo> discoveredReducerInfos = assembliesToScan
 				.SelectMany(asm => asm.GetTypes())
 				.Select(t => new
 				{
