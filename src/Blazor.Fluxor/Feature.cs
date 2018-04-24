@@ -17,16 +17,10 @@ namespace Blazor.Fluxor
 
 		public void AddReducer<TAction>(IReducer<TState, TAction> reducer)
 		{
-			AddReducer(reducer, typeof(TAction));
-		}
-		
-		public void AddReducer(IReducer reducer, Type actionType)
-		{
 			if (reducer == null)
 				throw new ArgumentNullException(nameof(reducer));
-			if (actionType == null)
-				throw new ArgumentNullException(nameof(actionType));
 
+			Type actionType = typeof(TAction);
 			if (!ReducersByActionType.TryGetValue(actionType, out List<object> reducers))
 			{
 				reducers = new List<object>();
@@ -36,11 +30,12 @@ namespace Blazor.Fluxor
 		}
 
 		public void ReceiveDispatchNotificationFromStore<TAction>(TAction action)
+			where TAction: IAction
 		{
 			if (action == null)
 				throw new ArgumentNullException(nameof(action));
 
-			IEnumerable<IReducer<TState, TAction>> reducers = GetReducersForAction<TAction>();
+			IEnumerable<IReducer<TState, TAction>> reducers = GetReducersForAction<TAction>(action);
 			TState newState = State;
 			if (reducers != null)
 			{
@@ -52,9 +47,9 @@ namespace Blazor.Fluxor
 			State = newState;
 		}
 
-		private IEnumerable<IReducer<TState, TAction>> GetReducersForAction<TAction>()
+		private IEnumerable<IReducer<TState, TAction>> GetReducersForAction<TAction>(IAction action)
 		{
-			ReducersByActionType.TryGetValue(typeof(TAction), out List<object> reducers);
+			ReducersByActionType.TryGetValue(action.GetType(), out List<object> reducers);
 			var typeSafeReducers =
 				reducers != null
 				? reducers.Cast<IReducer<TState, TAction>>()

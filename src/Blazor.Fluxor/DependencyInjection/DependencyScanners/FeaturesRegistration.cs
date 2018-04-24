@@ -8,14 +8,14 @@ namespace Blazor.Fluxor.DependencyInjection.DependencyScanners
 {
     internal static class FeaturesRegistration
     {
-		internal static IEnumerable<DiscoveredFeatureInfo> DiscoverFeatures(IServiceCollection serviceCollection, Assembly[] assembliesToParse,
-			IEnumerable<DiscoveredReducerInfo> discoveredReducerInfos)
+		internal static IEnumerable<DiscoveredFeatureInfo> DiscoverFeatures(IServiceCollection serviceCollection, 
+			Assembly[] assembliesToScan, IEnumerable<DiscoveredReducerInfo> discoveredReducerInfos)
 		{
 			Dictionary<Type, IGrouping<Type, DiscoveredReducerInfo>> discoveredReducerInfosByStateType = discoveredReducerInfos
 				.GroupBy(x => x.StateType)
 				.ToDictionary(x => x.Key);
 
-			IEnumerable<DiscoveredFeatureInfo> discoveredFeatureInfos = assembliesToParse
+			IEnumerable<DiscoveredFeatureInfo> discoveredFeatureInfos = assembliesToScan
 				.SelectMany(asm => asm.GetTypes())
 				.Select(t => new
 				{
@@ -48,6 +48,8 @@ namespace Blazor.Fluxor.DependencyInjection.DependencyScanners
 		private static void RegisterFeature(IServiceCollection serviceCollection,
 			DiscoveredFeatureInfo discoveredFeatureInfo, IEnumerable<DiscoveredReducerInfo> discoveredFeatureInfosForFeatureState)
 		{
+			string addReducerMethodName = nameof(IFeature<object>.AddReducer);
+
 			// Register the implementing type so we can get an instance from the service provider
 			serviceCollection.AddScoped(discoveredFeatureInfo.ImplementingType);
 
@@ -61,8 +63,12 @@ namespace Blazor.Fluxor.DependencyInjection.DependencyScanners
 				{
 					foreach (DiscoveredReducerInfo reducerInfo in discoveredFeatureInfosForFeatureState)
 					{
-						IReducer reducerForFeature = (IReducer)serviceProvider.GetService(reducerInfo.ReducerInterfaceGenericType);
-						featureInstance.AddReducer(reducerForFeature, reducerInfo.ActionType);
+						MethodInfo featureAddreducerMethod = discoveredFeatureInfo.ImplementingType
+							.GetMethod(addReducerMethodName)
+							.MakeGenericMethod(reducerInfo.ActionType);
+
+						object reducerInstance = serviceProvider.GetService(reducerInfo.ReducerInterfaceGenericType);
+						featureAddreducerMethod.Invoke(featureInstance, new object[] { reducerInstance });
 					}
 				}
 

@@ -6,9 +6,9 @@ namespace Blazor.Fluxor
 {
 	public static class ServiceCollectionExtensions
 	{
-		public static IServiceCollection AddFluxor(this IServiceCollection serviceCollection, params Assembly[] assembliesToParse)
+		public static IServiceCollection AddFluxor(this IServiceCollection serviceCollection, params Assembly[] assembliesToScan)
 		{
-			return DependencyScanner.Scan(serviceCollection, assembliesToParse);
+			return DependencyScanner.Scan(serviceCollection, assembliesToScan);
 		}
 	}
 }
