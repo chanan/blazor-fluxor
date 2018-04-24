@@ -15,6 +15,9 @@ The easiest way to get started is to look at the [Sample projects]. They are num
 More sample projects will be added as the framework develops.
   - [Counter sample] - Fluxorizes Counter page in the standard Visual Studio Blazor sample.
 
+### New features in 0.0.3
+  - Added side-effects for calling out to async routines such as HTTP requests
+  
 ### New features in 0.0.2
   - Automatic discovery of store, features, and reducers via dependency injection.
 
