@@ -10,7 +10,7 @@ namespace WeatherForecastSample.Client.Store.FetchData.Reducers
 			return new FetchDataState(
 				isLoading: false,
 				errorMessage: action.ErrorMessage,
-				forecasts: null);
+				forecasts: state.Forecasts);
 		}
 	}
 }

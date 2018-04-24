@@ -133,8 +133,3 @@ namespace CounterSample.Client.Store.Counter.Reducers
    * The second generic parameter in the interface should identify the action the `Reducer` will react to, in this case it is the `IncrementCounterAction` class.
    
 If the `Reducer` does not modify the state at all then it is recommended that you return the original state passed into the `Reduce` method. 
-
-
-
-
- 
