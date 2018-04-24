@@ -17,16 +17,10 @@ namespace Blazor.Fluxor
 
 		public void AddReducer<TAction>(IReducer<TState, TAction> reducer)
 		{
-			AddReducer(reducer, typeof(TAction));
-		}
-		
-		public void AddReducer(IReducer reducer, Type actionType)
-		{
 			if (reducer == null)
 				throw new ArgumentNullException(nameof(reducer));
-			if (actionType == null)
-				throw new ArgumentNullException(nameof(actionType));
 
+			Type actionType = typeof(TAction);
 			if (!ReducersByActionType.TryGetValue(actionType, out List<object> reducers))
 			{
 				reducers = new List<object>();

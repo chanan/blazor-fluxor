@@ -48,6 +48,8 @@ namespace Blazor.Fluxor.DependencyInjection.DependencyScanners
 		private static void RegisterFeature(IServiceCollection serviceCollection,
 			DiscoveredFeatureInfo discoveredFeatureInfo, IEnumerable<DiscoveredReducerInfo> discoveredFeatureInfosForFeatureState)
 		{
+			string addReducerMethodName = nameof(IFeature<object>.AddReducer);
+
 			// Register the implementing type so we can get an instance from the service provider
 			serviceCollection.AddScoped(discoveredFeatureInfo.ImplementingType);
 
@@ -61,8 +63,12 @@ namespace Blazor.Fluxor.DependencyInjection.DependencyScanners
 				{
 					foreach (DiscoveredReducerInfo reducerInfo in discoveredFeatureInfosForFeatureState)
 					{
-						IReducer reducerForFeature = (IReducer)serviceProvider.GetService(reducerInfo.ReducerInterfaceGenericType);
-						featureInstance.AddReducer(reducerForFeature, reducerInfo.ActionType);
+						MethodInfo featureAddreducerMethod = discoveredFeatureInfo.ImplementingType
+							.GetMethod(addReducerMethodName)
+							.MakeGenericMethod(reducerInfo.ActionType);
+
+						object reducerInstance = serviceProvider.GetService(reducerInfo.ReducerInterfaceGenericType);
+						featureAddreducerMethod.Invoke(featureInstance, new object[] { reducerInstance });
 					}
 				}
 
