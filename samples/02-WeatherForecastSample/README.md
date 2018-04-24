@@ -87,7 +87,7 @@ We now need to change the rest of the page in the following ways
    * We show a `Loading` message if IsLoading is true in the state.
    * We databind the table to the forecast data in the feature state
 
-3. At the following code at the top of the page, beneath the <h1> tag
+3. At the following code at the top of the page, beneath the *h1* tag
 ```
 @if (Feature.State.ErrorMessage != null)
 {
