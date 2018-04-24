@@ -4,12 +4,12 @@ namespace Blazor.Fluxor
 {
 	public interface IEffect
 	{
-		Task<IAction> Handle(IAction action);
+		Task<IAction[]> Handle(IAction action);
 	}
 
 	public interface IEffect<TAction>: IEffect
 	  where TAction : IAction
 	{
-		Task<IAction> Handle(TAction action);
+		Task<IAction[]> Handle(TAction action);
 	}
 }

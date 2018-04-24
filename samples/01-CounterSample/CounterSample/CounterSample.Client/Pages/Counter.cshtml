@@ -15,8 +15,8 @@
 
 @functions {
 
-void IncrementCount()
+async void IncrementCount()
 {
-    Store.Dispatch(new IncrementCounterAction());
+    await Store.Dispatch(new IncrementCounterAction());
 }
 }

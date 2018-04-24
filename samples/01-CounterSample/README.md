@@ -72,7 +72,7 @@ The Flux pattern is structured so that the logic and state of the application ca
 ```
 namespace CounterSample.Client.Store.Counter.Actions
 {
-	public class IncrementCounterAction
+	public class IncrementCounterAction: IAction
 	{
 	}
 }
@@ -96,11 +96,13 @@ The declaration section at the top of the file should now look like this:
    * The `@inject IStore Store` line instructs Blazor to inject the `Store` instance so we can dispatch actions to it.
 4. Change the `IncrementCount` function to dispatch an action to the store instructing it to increment the counter value.
 ```
-void IncrementCount()
+async void IncrementCount()
 {
-    Store.Dispatch(new IncrementCounterAction());
+    await Store.Dispatch(new IncrementCounterAction());
 }
 ```
+   * Although the method would work fine without being async, it is best practice to always use the async/await pattern when dispatching to the store because you never know when the store might have an effect registered that will perform asynchronous action.
+   
 ### Mutating the state in response to dispatched actions
 So far we have some feature state, a feature that exposes that state for displaying in the user interface, and an action we can dispatch to the store to indicate the user's desire to increment the value in the state. The final piece of the pattern is to implement a `Reducer`.
 

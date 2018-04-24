@@ -19,7 +19,7 @@ namespace WeatherForecastSample.Server.Controllers
 		[HttpGet("[action]")]
 		public IEnumerable<WeatherForecast> WeatherForecasts()
 		{
-			Thread.Sleep(2000);
+			Task.Delay(2000);
 			var rng = new Random();
 			return Enumerable.Range(1, 5).Select(index => new WeatherForecast
 			{
