@@ -13,7 +13,8 @@ The easiest way to get started is to look at the [Sample projects]. They are num
 
 ### Sample projects
 More sample projects will be added as the framework develops.
-  - [Counter sample] - Fluxorizes Counter page in the standard Visual Studio Blazor sample.
+  - [Counter sample] - Fluxorizes `Counter` page in the standard Visual Studio Blazor sample in order to show how to switch to a Redux/Flux pattern application using Fluxor.
+  - [Effects sample] - Fluxorizes `FetchData` page in the standard Visual Studio Blazor sample in order to demonstrate asynchronous reactions to actions that are dispatched.
 
 ### New in 0.0.4
   - Changed side-effects to return an array of actions to dispatch rather than limiting it to a single action
@@ -34,4 +35,5 @@ MIT
    [Official Blazor-Fluxor nuget page]: <https://www.nuget.org/packages/Blazor.Fluxor>
    [Microsoft aspdotnet blazor project]: <https://github.com/aspnet/Blazor>
    [Counter sample]: <https://github.com/mrpmorris/blazor-fluxor/tree/master/samples/01-CounterSample>
+   [Effects sample]: <https://github.com/mrpmorris/blazor-fluxor/tree/master/samples/02-WeatherForecastSample>
    [Sample projects]: <https://github.com/mrpmorris/blazor-fluxor/tree/master/samples>
