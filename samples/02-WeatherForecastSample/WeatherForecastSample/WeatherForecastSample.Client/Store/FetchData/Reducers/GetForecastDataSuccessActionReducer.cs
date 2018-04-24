@@ -7,8 +7,10 @@ namespace WeatherForecastSample.Client.Store.FetchData.Reducers
 	{
 		public FetchDataState Reduce(FetchDataState state, GetForecastDataSuccessAction action)
 		{
-			System.Console.WriteLine("Reducing http success data into state");
-			return new FetchDataState(action.WeatherForecasts);
+			return new FetchDataState(
+				isLoading: false,
+				errorMessage: null,
+				forecasts: action.WeatherForecasts);
 		}
 	}
 }

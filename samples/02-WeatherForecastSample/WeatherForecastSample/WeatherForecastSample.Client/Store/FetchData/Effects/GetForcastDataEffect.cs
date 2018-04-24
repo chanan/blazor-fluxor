@@ -4,6 +4,7 @@ using WeatherForecastSample.Shared;
 using Microsoft.AspNetCore.Blazor;
 using WeatherForecastSample.Client.Store.FetchData.Actions;
 using System.Threading.Tasks;
+using System;
 
 namespace WeatherForecastSample.Client.Store.FetchData.Effects
 {
@@ -18,17 +19,14 @@ namespace WeatherForecastSample.Client.Store.FetchData.Effects
 
 		public override async Task<IAction> Handle(GetForecastDataAction action)
 		{
-			System.Console.WriteLine("About to do a HTTP request");
 			try
 			{
 				WeatherForecast[] forecasts = await HttpClient.GetJsonAsync<WeatherForecast[]>("/api/SampleData/WeatherForecasts");
-				System.Console.WriteLine("Success");
 				return new GetForecastDataSuccessAction(forecasts);
 			}
-			catch
+			catch (Exception e)
 			{
-				System.Console.WriteLine("Failed");
-				return new GetForecastDataFailedAction();
+				return new GetForecastDataFailedAction(errorMessage: e.Message);
 			}
 		}
 	}

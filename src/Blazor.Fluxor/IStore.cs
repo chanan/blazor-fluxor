@@ -7,6 +7,7 @@ namespace Blazor.Fluxor
 	{
 		void AddEffect(Type actionType, IEffect effect);
 		void AddFeature(IFeature feature);
-		Task Dispatch(IAction action);
+		Task Dispatch<TAction>(TAction action) 
+			where TAction : IAction;
 	}
 }

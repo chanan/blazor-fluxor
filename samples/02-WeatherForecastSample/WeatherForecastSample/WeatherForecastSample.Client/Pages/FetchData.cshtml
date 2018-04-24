@@ -8,15 +8,21 @@
 
 <h1>Weather forecast</h1>
 
+@if (Feature.State.ErrorMessage != null)
+{
+    <h1>Error</h1>
+    <p>@Feature.State.ErrorMessage</p>
+}
+
 <p>This page <strong>has</strong> been Fluxorized</p>
 
 <p>This component demonstrates fetching data from the server.</p>
 
-@if (Feature.State.Forecasts == null)
+@if (Feature.State.IsLoading)
 {
-    <p><em>Loading...</em></p>
+    <p><strong>There is a 2 second delay on the server just so you can see this loading message!</strong></p>
 }
-else
+@if (Feature.State.Forecasts != null)
 {
     <table class="table">
         <thead>
@@ -41,10 +47,10 @@ else
     </table>
 }
 
+
 @functions {
-   protected override async Task OnInitAsync()
-   {
-       await Store.Dispatch(new GetForecastDataAction());
-       StateHasChanged();
-   }
+protected override async Task OnInitAsync()
+{
+    await Store.Dispatch(new GetForecastDataAction());
+}
 }
