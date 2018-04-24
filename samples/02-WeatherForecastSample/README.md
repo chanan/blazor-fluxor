@@ -115,6 +115,66 @@ The code at the bottom of the `FetchData.cshtml` page calls out to a server. We 
 }
 ```
 
+The entirety of the `FetchData.cshtml` file should look like this
+```
+@page "/fetchdata"
+@using WeatherForecastSample.Shared
+@using Blazor.Fluxor
+@using Store.FetchData
+@using Store.FetchData.Actions
+@inject IStore Store
+@inject IFeature<FetchDataState> Feature
+
+<h1>Weather forecast</h1>
+
+@if (Feature.State.ErrorMessage != null)
+{
+    <h1>Error</h1>
+    <p>@Feature.State.ErrorMessage</p>
+}
+
+<p>This page <strong>has</strong> been Fluxorized</p>
+
+<p>This component demonstrates fetching data from the server.</p>
+
+@if (Feature.State.IsLoading)
+{
+    <p>Loading...</p>
+}
+@if (Feature.State.Forecasts != null)
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Date</th>Chan
+                <th>Temp. (C)</th>
+                <th>Temp. (F)</th>
+                <th>Summary</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var forecast in Feature.State.Forecasts)
+            {
+                <tr>
+                    <td>@forecast.Date.ToShortDateString()</td>
+                    <td>@forecast.TemperatureC</td>
+                    <td>@forecast.TemperatureF</td>
+                    <td>@forecast.Summary</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+
+@functions {
+protected override async Task OnInitAsync()
+{
+    await Store.Dispatch(new GetForecastDataAction());
+}
+}
+```
+
 ## Listening to the action with an effect, and calling out to a HTTP server asynchronously
 Now that our UI has dispatched the `GetForecastDataAction` action we need our store to call out to a HTTP server asychronously and fetch the data we need.
 
