@@ -73,20 +73,27 @@ namespace Blazor.Fluxor
 
 		private async Task<IEnumerable<IAction>> TriggerEffects(IAction action)
 		{
-			var actionsCreatedBySideEffects = new List<IAction>();
+			var allActionsCreatedByAllSideEffects = new List<IAction>();
 
 			IEnumerable<IEffect> effectsForAction = GetEffectsForActionType(action.GetType(), false);
 			if (effectsForAction != null && effectsForAction.Any())
 			{
 				foreach (var effect in effectsForAction)
 				{
-					IAction actionFromSideEffect = await effect.Handle(action);
-					if (actionFromSideEffect != null)
-						actionsCreatedBySideEffects.Add(actionFromSideEffect);
+					IAction[] actionsFromSideEffect = await effect.Handle(action);
+					if (actionsFromSideEffect != null)
+					{
+						foreach(IAction actionFromSideEffect in actionsFromSideEffect)
+						{
+							if (actionFromSideEffect != null)
+								allActionsCreatedByAllSideEffects.Add(actionFromSideEffect);
+						}
+					}
+						
 				}
 			}
 
-			return actionsCreatedBySideEffects;
+			return allActionsCreatedByAllSideEffects;
 		}
 
 	}

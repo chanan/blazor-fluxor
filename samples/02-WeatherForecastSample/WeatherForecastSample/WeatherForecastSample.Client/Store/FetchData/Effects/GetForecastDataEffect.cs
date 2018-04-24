@@ -8,25 +8,25 @@ using System;
 
 namespace WeatherForecastSample.Client.Store.FetchData.Effects
 {
-	public class GetForcastDataEffect : Effect<GetForecastDataAction>
+	public class GetForecastDataEffect : Effect<GetForecastDataAction>
 	{
 		private readonly HttpClient HttpClient;
 
-		public GetForcastDataEffect(HttpClient httpClient)
+		public GetForecastDataEffect(HttpClient httpClient)
 		{
 			HttpClient = httpClient;
 		}
 
-		public override async Task<IAction> Handle(GetForecastDataAction action)
+		public override async Task<IAction[]> Handle(GetForecastDataAction action)
 		{
 			try
 			{
 				WeatherForecast[] forecasts = await HttpClient.GetJsonAsync<WeatherForecast[]>("/api/SampleData/WeatherForecasts");
-				return new GetForecastDataSuccessAction(forecasts);
+				return new IAction[] { new GetForecastDataSuccessAction(forecasts) };
 			}
 			catch (Exception e)
 			{
-				return new GetForecastDataFailedAction(errorMessage: e.Message);
+				return new IAction[] { new GetForecastDataFailedAction(errorMessage: e.Message) };
 			}
 		}
 	}
