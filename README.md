@@ -20,6 +20,7 @@ More sample projects will be added as the framework develops.
 ### New in 0.0.5
   - Changed the signature of ServiceCollection.AddFluxor to pass in an Options object
   - Added support for Redux Dev Tools
+  - Added support for adding custom Middleware
   
 ### New in 0.0.4
   - Changed side-effects to return an array of actions to dispatch rather than limiting it to a single action
