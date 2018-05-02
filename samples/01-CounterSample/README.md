@@ -11,10 +11,12 @@ This sample shows how to take the standard Visual Studio Blazor template and Flu
 2. Add `using Blazor.Fluxor;`
 3. Change the serviceProvider initialization code to add Fluxor
 ```
-    var serviceProvider = new BrowserServiceProvider(services =>
-    {
-    	services.AddFluxor(typeof(Program).Assembly);
-    });
+	var serviceProvider = new BrowserServiceProvider(services =>
+	{
+		services.AddFluxor(options => options
+			.UseDependencyInjection(typeof(Program).Assembly)
+		);
+	});
 ```
 
 ### Adding state
@@ -44,11 +46,13 @@ namespace CounterSample.Client.Store.Counter
 {
 	public class CounterFeature : Feature<CounterState>
 	{
+		public override string GetName() => "Counter";
 		protected override CounterState GetInitialState() => new CounterState(0);
 	}
 }
 ```
    * Your class should descend from `Feature<>`, and the type parameter should specify the class you intend to use as the feature's state - in this case the `CounterState` class.
+   * Your class should override the `GetName()` method. This should return the name of the property to store this feature's state against.
    * Your class should override the `GetInitialState()` method. This should return the initial state of this feature. This means whatever state you'd like this part of your application to contain *before* the user interacts with it.
  
 ### Displaying state in the user interface

@@ -39,6 +39,7 @@ namespace WeatherForecastSample.Client.Store.FetchData
 {
 	public class FetchDataFeature : Feature<FetchDataState>
 	{
+		public override string GetName() => "FetchData";
 		protected override FetchDataState GetInitialState() => new FetchDataState(
 			isLoading: false,
 			errorMessage: null,
@@ -48,7 +49,7 @@ namespace WeatherForecastSample.Client.Store.FetchData
 ```
   
 ## Creating the action that triggers a data request to the HTTP server
-1. Create a class `Store\FetchData\Actions\GetForecastDataAction.cs`. This class can remain empty.
+1. Create a class `Store\FetchData\Actions\GetForecastDataAction.cs`. This class can remain empty, but it must implement the interface `IAction`.
 2. When this action is dispatched to the store we want to clear out any previous state and set IsLoading to true. To do this create a class `Store\FetchData\Reducers\GetForecastDataActionReducer.cs` with the following code
 ```
 using Blazor.Fluxor;
@@ -246,7 +247,6 @@ namespace WeatherForecastSample.Client.Store.FetchData.Actions
 		{
 			ErrorMessage = errorMessage;
 		}
-
     }
 }
 ```

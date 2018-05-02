@@ -23,6 +23,14 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WeatherForecastSample.Clien
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WeatherForecastSample.Server", "..\samples\02-WeatherForecastSample\WeatherForecastSample\WeatherForecastSample.Server\WeatherForecastSample.Server.csproj", "{E1EDACA5-3C3B-4A42-ABAB-193CD889041B}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "03-Redux dev tools integraton", "03-Redux dev tools integraton", "{E1FEF7FC-6871-43EA-8E58-AB019F4AEC58}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ReduxDevToolsIntegration.Shared", "..\samples\03-ReduxDevToolsIntegration\ReduxDevToolsIntegration\ReduxDevToolsIntegration.Shared\ReduxDevToolsIntegration.Shared.csproj", "{9CC8D132-8DB9-451A-9CF2-708A39F3E03F}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ReduxDevToolsIntegration.Client", "..\samples\03-ReduxDevToolsIntegration\ReduxDevToolsIntegration\ReduxDevToolsIntegration.Client\ReduxDevToolsIntegration.Client.csproj", "{D53754E9-ABF6-4392-894A-ECF45ECB8183}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ReduxDevToolsIntegration.Server", "..\samples\03-ReduxDevToolsIntegration\ReduxDevToolsIntegration\ReduxDevToolsIntegration.Server\ReduxDevToolsIntegration.Server.csproj", "{698BAE3F-6DCE-4F1A-B35A-F2D9D34D502D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -57,6 +65,18 @@ Global
 		{E1EDACA5-3C3B-4A42-ABAB-193CD889041B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E1EDACA5-3C3B-4A42-ABAB-193CD889041B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E1EDACA5-3C3B-4A42-ABAB-193CD889041B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9CC8D132-8DB9-451A-9CF2-708A39F3E03F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9CC8D132-8DB9-451A-9CF2-708A39F3E03F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9CC8D132-8DB9-451A-9CF2-708A39F3E03F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9CC8D132-8DB9-451A-9CF2-708A39F3E03F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D53754E9-ABF6-4392-894A-ECF45ECB8183}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D53754E9-ABF6-4392-894A-ECF45ECB8183}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D53754E9-ABF6-4392-894A-ECF45ECB8183}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D53754E9-ABF6-4392-894A-ECF45ECB8183}.Release|Any CPU.Build.0 = Release|Any CPU
+		{698BAE3F-6DCE-4F1A-B35A-F2D9D34D502D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{698BAE3F-6DCE-4F1A-B35A-F2D9D34D502D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{698BAE3F-6DCE-4F1A-B35A-F2D9D34D502D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{698BAE3F-6DCE-4F1A-B35A-F2D9D34D502D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -70,6 +90,10 @@ Global
 		{CBD4A3E0-5C1B-46EF-B0A6-0631DDDA016D} = {0486E8E0-F968-4D98-AEB1-6BEF6EF4E412}
 		{034C80DF-09D5-4ACF-B99F-5BF2E85EFFB1} = {0486E8E0-F968-4D98-AEB1-6BEF6EF4E412}
 		{E1EDACA5-3C3B-4A42-ABAB-193CD889041B} = {0486E8E0-F968-4D98-AEB1-6BEF6EF4E412}
+		{E1FEF7FC-6871-43EA-8E58-AB019F4AEC58} = {1A6663AC-4F1F-40AD-8D03-0B0977ED466D}
+		{9CC8D132-8DB9-451A-9CF2-708A39F3E03F} = {E1FEF7FC-6871-43EA-8E58-AB019F4AEC58}
+		{D53754E9-ABF6-4392-894A-ECF45ECB8183} = {E1FEF7FC-6871-43EA-8E58-AB019F4AEC58}
+		{698BAE3F-6DCE-4F1A-B35A-F2D9D34D502D} = {E1FEF7FC-6871-43EA-8E58-AB019F4AEC58}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {B1F2E0DF-C651-48A3-83E3-3B77D34EC3A2}

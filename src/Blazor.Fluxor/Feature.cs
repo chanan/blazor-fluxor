@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Blazor;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -6,7 +7,12 @@ namespace Blazor.Fluxor
 {
 	public abstract class Feature<TState> : IFeature<TState>
 	{
+		public abstract string GetName();
 		public TState State { get; private set; }
+		public object GetState() => State;
+		public void RestoreState(object value) => State = (TState)value;
+		public Type GetStateType() => typeof(TState);
+
 		protected abstract TState GetInitialState();
 		private readonly Dictionary<Type, List<Object>> ReducersByActionType = new Dictionary<Type, List<Object>>();
 

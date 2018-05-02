@@ -1,0 +1,22 @@
+﻿@page "/counter"
+@inherits Blazor.Fluxor.Temporary.FluxorComponent
+@using Blazor.Fluxor
+@using ReduxDevToolsIntegration.Client.Store.Counter
+@using ReduxDevToolsIntegration.Client.Store.Counter.Actions
+@inject IFeature<CounterState> Feature
+@inject IStore Store
+
+<h1>Counter</h1>
+
+<p>This page <strong>has</strong> been Fluxorized</p>
+
+<p>Current count: @Feature.State.Value</p>
+
+<button onclick="@IncrementCount">Click me</button>
+
+@functions {
+async void IncrementCount()
+{
+    await Store.Dispatch(new IncrementCounterAction());
+}
+}

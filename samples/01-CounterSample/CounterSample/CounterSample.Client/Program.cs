@@ -10,7 +10,9 @@ namespace CounterSample.Client
         {
             var serviceProvider = new BrowserServiceProvider(services =>
             {
-					services.AddFluxor(typeof(Program).Assembly);
+					services.AddFluxor(options => options
+						.UseDependencyInjection(typeof(Program).Assembly)
+					);
 				});
 
             new BrowserRenderer(serviceProvider).AddComponent<App>("app");
