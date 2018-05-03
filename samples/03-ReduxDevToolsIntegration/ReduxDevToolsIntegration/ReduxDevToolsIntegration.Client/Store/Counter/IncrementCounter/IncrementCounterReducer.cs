@@ -1,7 +1,6 @@
 ﻿using Blazor.Fluxor;
-using ReduxDevToolsIntegration.Client.Store.Counter.Actions;
 
-namespace ReduxDevToolsIntegration.Client.Store.Counter.Reducers
+namespace ReduxDevToolsIntegration.Client.Store.Counter.IncrementCounter
 {
 	public class IncrementCounterReducer : IReducer<CounterState, IncrementCounterAction>
 	{

@@ -71,10 +71,10 @@ namespace CounterSample.Client.Store.Counter
 ### Dispatching actions to mutate the state
 The Flux pattern is structured so that the logic and state of the application can effectively function perfectly fine without a user interface being present at all. Changes to state are executed by using the `Store` to dispatch an `Action` telling it what to do next (update a person's details, increment a counter, or something else).
 
-1. In the Client project's `Store\Counter` folder add a new folder named `Actions`.
-2. In the `Actions` folder create a class named `IncrementCounterAction.cs` and add the following code.
+1. In the Client project's `Store\Counter` folder add a new folder named `IncrementCounter`.
+2. In this folder create a class named `IncrementCounterAction.cs` and add the following code.
 ```
-namespace CounterSample.Client.Store.Counter.Actions
+namespace CounterSample.Client.Store.Counter.IncrementCounter
 {
 	public class IncrementCounterAction: IAction
 	{
@@ -84,7 +84,7 @@ namespace CounterSample.Client.Store.Counter.Actions
    * In more complicated scenarios the action will have properties, in this case we don't need any as the action will always simply increment the current counter by 1.
 3. We now need to dispatch an instance of this action to the store whenever the user clicks the `Click me` button. Add the following declarations to the top of the `Pages\Counter.cshtml` file.
 ```
-@using CounterSample.Client.Store.Counter.Actions
+@using CounterSample.Client.Store.Counter.IncrementCounter
 @inject IStore Store
 ```
 The declaration section at the top of the file should now look like this:
@@ -92,11 +92,12 @@ The declaration section at the top of the file should now look like this:
 @page "/counter"
 @using Blazor.Fluxor
 @using CounterSample.Client.Store.Counter
-@using CounterSample.Client.Store.Counter.Actions
+@using CounterSample.Client.Store.Counter.IncrementCounter
 @inject IStore Store
 @inject IFeature<CounterState> Feature
 ```
-   * The `@using CounterSample.Client.Store.Counter.Actions` line is needed to identify the `IncrementCounterAction` class.
+   * The `@using CounterSample.Client.Store.Counter` line is needed to identify the `CounterState` class.
+   * The `@using CounterSample.Client.Store.Counter.IncrementCounter` line is needed to identify the `IncrementCounterAction` class.
    * The `@inject IStore Store` line instructs Blazor to inject the `Store` instance so we can dispatch actions to it.
 4. Change the `IncrementCount` function to dispatch an action to the store instructing it to increment the counter value.
 ```
@@ -114,13 +115,11 @@ A `Reducer` is effectively a pure function. It takes the two parameters, the cur
 
 If you recall, earlier I recommended you make all of the properties of your state should have private setters. The recommended pattern for reducing (altering) your state is to replace it with a completely new object that is the same as the previous state but with the relevant changes to its values.
 
-1. Create a folder `Reducers` in the `Store\Counter` folder.
-2. In the `Reducers` folder create a new file named `IncrementCounterReducer.cs` and enter the following code.
+1. In the `Store\Counter\IncrementCounter` folder create a new file named `IncrementCounterReducer.cs` and enter the following code.
 ```
 using Blazor.Fluxor;
-using CounterSample.Client.Store.Counter.Actions;
 
-namespace CounterSample.Client.Store.Counter.Reducers
+namespace CounterSample.Client.Store.Counter.IncrementCounter
 {
 	public class IncrementCounterReducer : IReducer<CounterState, IncrementCounterAction>
 	{
@@ -136,4 +135,6 @@ namespace CounterSample.Client.Store.Counter.Reducers
    * The first generic parameter in the interface should identify the state the `Reducer` deals with, in this case `CounterState`.
    * The second generic parameter in the interface should identify the action the `Reducer` will react to, in this case it is the `IncrementCounterAction` class.
    
-If the `Reducer` does not modify the state at all then it is recommended that you return the original state passed into the `Reduce` method. 
+If the `Reducer` does not modify the state at all then it is recommended that you return the original state passed into the `Reduce` method.
+
+Note that the folder structure and naming conventions used here are only recommendations. You may wish to have separate folders for Actions, Reducers, and Effects. Or you may wish to use the structure used in this sample so that all code related to `IncrementCounter` are accessible in the same folder.

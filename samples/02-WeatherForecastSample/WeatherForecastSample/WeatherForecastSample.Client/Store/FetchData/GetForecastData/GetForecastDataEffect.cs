@@ -2,11 +2,10 @@
 using System.Net.Http;
 using WeatherForecastSample.Shared;
 using Microsoft.AspNetCore.Blazor;
-using WeatherForecastSample.Client.Store.FetchData.Actions;
 using System.Threading.Tasks;
 using System;
 
-namespace WeatherForecastSample.Client.Store.FetchData.Effects
+namespace WeatherForecastSample.Client.Store.FetchData.GetForecastData
 {
 	public class GetForecastDataEffect : Effect<GetForecastDataAction>
 	{

@@ -1,12 +1,11 @@
 ﻿using Blazor.Fluxor;
 using Microsoft.AspNetCore.Blazor;
-using ReduxDevToolsIntegration.Client.Store.FetchData.Actions;
 using ReduxDevToolsIntegration.Shared;
 using System;
 using System.Net.Http;
 using System.Threading.Tasks;
 
-namespace ReduxDevToolsIntegration.Client.Store.FetchData.Effects
+namespace ReduxDevToolsIntegration.Client.Store.FetchData.GetForecastData
 {
 	public class GetForecastDataEffect : Effect<GetForecastDataAction>
 	{

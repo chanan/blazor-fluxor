@@ -1,7 +1,6 @@
 ﻿using Blazor.Fluxor;
-using ReduxDevToolsIntegration.Client.Store.FetchData.Actions;
 
-namespace ReduxDevToolsIntegration.Client.Store.FetchData.Reducers
+namespace ReduxDevToolsIntegration.Client.Store.FetchData.GetForecastData
 {
 	public class GetForecastDataFailedActionReducer : IReducer<FetchDataState, GetForecastDataFailedAction>
 	{

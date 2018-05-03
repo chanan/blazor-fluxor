@@ -3,7 +3,7 @@
 @using ReduxDevToolsIntegration.Shared
 @using Blazor.Fluxor
 @using Store.FetchData
-@using Store.FetchData.Actions
+@using Store.FetchData.GetForecastData
 @inject IStore Store
 @inject IFeature<FetchDataState> Feature
 
@@ -21,7 +21,7 @@
 
 @if (Feature.State.IsLoading)
 {
-    <p>Loading...</p>
+    <p><strong>There is a 2 second delay on the server just so you can see this loading message!</strong></p>
 }
 @if (Feature.State.Forecasts != null)
 {

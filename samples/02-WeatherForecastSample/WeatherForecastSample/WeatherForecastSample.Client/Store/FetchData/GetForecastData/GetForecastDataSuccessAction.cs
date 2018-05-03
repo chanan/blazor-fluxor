@@ -1,15 +1,16 @@
 ﻿using Blazor.Fluxor;
-using ReduxDevToolsIntegration.Shared;
+using WeatherForecastSample.Shared;
 
-namespace ReduxDevToolsIntegration.Client.Store.FetchData.Actions
+namespace WeatherForecastSample.Client.Store.FetchData.GetForecastData
 {
-	public class GetForecastDataSuccessAction: IAction
-	{
+    public class GetForecastDataSuccessAction: IAction
+    {
 		public WeatherForecast[] WeatherForecasts { get; private set; }
 
 		public GetForecastDataSuccessAction(WeatherForecast[] weatherForecasts)
 		{
 			WeatherForecasts = weatherForecasts;
 		}
-	}
+
+    }
 }

@@ -1,6 +1,6 @@
 ﻿using Blazor.Fluxor;
 
-namespace CounterSample.Client.Store.Counter.Actions
+namespace CounterSample.Client.Store.Counter.IncrementCounter
 {
 	public class IncrementCounterAction: IAction
 	{

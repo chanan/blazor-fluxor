@@ -49,13 +49,13 @@ namespace WeatherForecastSample.Client.Store.FetchData
 ```
   
 ## Creating the action that triggers a data request to the HTTP server
-1. Create a class `Store\FetchData\Actions\GetForecastDataAction.cs`. This class can remain empty, but it must implement the interface `IAction`.
-2. When this action is dispatched to the store we want to clear out any previous state and set IsLoading to true. To do this create a class `Store\FetchData\Reducers\GetForecastDataActionReducer.cs` with the following code
+1. Create a folder `Store\FetchData\GetForecastData`. 
+2. Create a class in that folder named `GetForecastDataAction.cs`. This class can remain empty, but it must implement the interface `IAction`.
+3. When this action is dispatched to the store we want to clear out any previous state and set IsLoading to true. To do this create a class `GetForecastDataActionReducer.cs` with the following code
 ```
 using Blazor.Fluxor;
-using WeatherForecastSample.Client.Store.FetchData.Actions;
 
-namespace WeatherForecastSample.Client.Store.FetchData.Reducers
+namespace WeatherForecastSample.Client.Store.FetchData.GetForecastData
 {
 	public class GetForecastDataActionReducer : IReducer<FetchDataState, GetForecastDataAction>
 	{
@@ -79,7 +79,7 @@ We need this action to be dispatched to the store when the FetchData page is loa
 @using WeatherForecastSample.Shared
 @using Blazor.Fluxor
 @using Store.FetchData
-@using Store.FetchData.Actions
+@using Store.FetchData.GetForecastData
 @inject IStore Store
 @inject IFeature<FetchDataState> Feature
 ```
@@ -122,7 +122,7 @@ The entirety of the `FetchData.cshtml` file should look like this
 @using WeatherForecastSample.Shared
 @using Blazor.Fluxor
 @using Store.FetchData
-@using Store.FetchData.Actions
+@using Store.FetchData.GetForecastData
 @inject IStore Store
 @inject IFeature<FetchDataState> Feature
 
@@ -183,7 +183,7 @@ A reducer cannot do this as it should be a pure function that takes a current st
 
 The solution is to create an effect that is triggered by the `GetForecastDataAcion` and then performs any long-running tasks in the background so that the store's reducers can complete their work and give the user immediate visual feedback, such as letting them know the page is loading data.
 
-1. Create a file `Store\FetchData\Effects\GetForecastDataEffect.cs`
+1. Create a file `Store\FetchData\GetForcastData\GetForecastDataEffect.cs`
 2. Descend the class from `Effect<GetForecastDataAction>` to indicate which action it should be listening for.
 3. Implement the HTTP request like as follows:
 ```
@@ -191,11 +191,10 @@ using Blazor.Fluxor;
 using System.Net.Http;
 using WeatherForecastSample.Shared;
 using Microsoft.AspNetCore.Blazor;
-using WeatherForecastSample.Client.Store.FetchData.Actions;
 using System.Threading.Tasks;
 using System;
 
-namespace WeatherForecastSample.Client.Store.FetchData.Effects
+namespace WeatherForecastSample.Client.Store.FetchData.GetForecastData
 {
 	public class GetForecastDataEffect : Effect<GetForecastDataAction>
 	{
@@ -233,11 +232,11 @@ In this example, the side effect that executes in a background thread in respons
 
 We now need to add the two actions the `GetForecastDataEffect` can create, and if we need those actions to alter state (as we do in this sample) then we also need reducers.
 
-1. Create a class for the `Failed` action `Store\FetchData\Actions\GetForecastFailedAction.cs` with a single string property `ErrorMessage`.
+1. Create a class for the `Failed` action `Store\FetchData\GetForecastData\GetForecastFailedAction.cs` with a single string property `ErrorMessage`.
 ```
 using Blazor.Fluxor;
 
-namespace WeatherForecastSample.Client.Store.FetchData.Actions
+namespace WeatherForecastSample.Client.Store.FetchData.GetForecastData
 {
     public class GetForecastDataFailedAction: IAction
     {
@@ -250,12 +249,11 @@ namespace WeatherForecastSample.Client.Store.FetchData.Actions
     }
 }
 ```
-2. Now create a reducer to alter state accordingly when that action is dispatched. To do this create a file `Store\FetchData\Reducers\GetForecastDataFailedActionReducer.cs` and return a modified state that contains the `ErrorMessage` dispatched in the action.
+2. Now create a reducer to alter state accordingly when that action is dispatched. To do this create a file `Store\FetchData\GetForecastData\GetForecastDataFailedActionReducer.cs` and return a modified state that contains the `ErrorMessage` dispatched in the action.
 ```
 using Blazor.Fluxor;
-using WeatherForecastSample.Client.Store.FetchData.Actions;
 
-namespace WeatherForecastSample.Client.Store.FetchData.Reducers
+namespace WeatherForecastSample.Client.Store.FetchData.GetForecastData
 {
 	public class GetForecastDataFailedActionReducer : IReducer<FetchDataState, GetForecastDataFailedAction>
 	{
@@ -269,12 +267,12 @@ namespace WeatherForecastSample.Client.Store.FetchData.Reducers
 	}
 }
 ```
-3. Now create a class for the `Success` action in `Store\FetchData\Actions\GetForecastDataSuccessAction.cs` with a single property that will contain the forecast data the effect received from the server.
+3. Now create a class for the `Success` action in `Store\FetchData\GetForecastData\GetForecastDataSuccessAction.cs` with a single property that will contain the forecast data the effect received from the server.
 ```
 using Blazor.Fluxor;
 using WeatherForecastSample.Shared;
 
-namespace WeatherForecastSample.Client.Store.FetchData.Actions
+namespace WeatherForecastSample.Client.Store.FetchData.GetForecastData
 {
     public class GetForecastDataSuccessAction: IAction
     {
@@ -288,12 +286,11 @@ namespace WeatherForecastSample.Client.Store.FetchData.Actions
     }
 }
 ```
-4. And, finally, add a reducer to ensure the forecast data is reduced into the state of our `FetchData` feature. Create a class in `Store\FetchData\Reducers\GetForecastDataSuccessAction.cs`
+4. And, finally, add a reducer to ensure the forecast data is reduced into the state of our `FetchData` feature. Create a class in `Store\FetchData\GetForecastData\GetForecastDataSuccessAction.cs`
 ```
 using Blazor.Fluxor;
-using WeatherForecastSample.Client.Store.FetchData.Actions;
 
-namespace WeatherForecastSample.Client.Store.FetchData.Reducers
+namespace WeatherForecastSample.Client.Store.FetchData.GetForecastData
 {
 	public class GetForecastDataSuccessActionReducer : IReducer<FetchDataState, GetForecastDataSuccessAction>
 	{
@@ -309,6 +306,6 @@ namespace WeatherForecastSample.Client.Store.FetchData.Reducers
 ```
 
 ## And finally...
-Run the application and go to the `Fetch Data` link on the page. You should see the data load from the server. If it is too quick for you to see your `Loading...` message then open the `SampleDataController` in your Server's `Controllers` folder and add `Task.Delay(2000);` at the top of the `WeatherForecasts()` method.
+Run the application and go to the `Fetch Data` link on the page. You should see the data load from the server. If it is too quick for you to see your `Loading...` message then open the `SampleDataController` in your Server's `Controllers` folder and add `await Task.Delay(2000);` at the top of the `WeatherForecasts()` method.
 
 [Tutorial 1]: <https://github.com/mrpmorris/blazor-fluxor/tree/master/samples/01-CounterSample>

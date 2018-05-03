@@ -1,7 +1,6 @@
 ﻿using Blazor.Fluxor;
-using WeatherForecastSample.Client.Store.FetchData.Actions;
 
-namespace WeatherForecastSample.Client.Store.FetchData.Reducers
+namespace WeatherForecastSample.Client.Store.FetchData.GetForecastData
 {
 	public class GetForecastDataFailedActionReducer : IReducer<FetchDataState, GetForecastDataFailedAction>
 	{
