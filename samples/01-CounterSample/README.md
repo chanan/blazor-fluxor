@@ -59,11 +59,11 @@ namespace CounterSample.Client.Store.Counter
 1. Edit `Pages\Counter.cshtml` and add the following `using` clauses.
 ```
 @using Blazor.Fluxor
-@using CounterSample.Client.Store.Counter
+@using Store.Counter
 @inject IFeature<CounterState> Feature
 ```
    * `@using Blazor.Fluxor` is required in order to identify the `IFeature<>` interface.
-   * `@using CounterSample.Client.Store.Counter` is required to identify the `CounterState` class we wish to use.
+   * `@using Store.Counter` is required to identify the `CounterState` class we wish to use.
    * `@inject IFeature<CounterState> Feature` will instruct Blazor to provide use with a reference to our `CounterFeature` from which we can obtain state.
 
 2. Change the html that displays the value of the counter to display `@Feature.State.Value` instead.
@@ -84,20 +84,20 @@ namespace CounterSample.Client.Store.Counter.IncrementCounter
    * In more complicated scenarios the action will have properties, in this case we don't need any as the action will always simply increment the current counter by 1.
 3. We now need to dispatch an instance of this action to the store whenever the user clicks the `Click me` button. Add the following declarations to the top of the `Pages\Counter.cshtml` file.
 ```
-@using CounterSample.Client.Store.Counter.IncrementCounter
+@using Store.Counter.IncrementCounter
 @inject IStore Store
 ```
 The declaration section at the top of the file should now look like this:
 ```
 @page "/counter"
 @using Blazor.Fluxor
-@using CounterSample.Client.Store.Counter
-@using CounterSample.Client.Store.Counter.IncrementCounter
+@using Store.Counter
+@using Store.Counter.IncrementCounter
 @inject IStore Store
 @inject IFeature<CounterState> Feature
 ```
-   * The `@using CounterSample.Client.Store.Counter` line is needed to identify the `CounterState` class.
-   * The `@using CounterSample.Client.Store.Counter.IncrementCounter` line is needed to identify the `IncrementCounterAction` class.
+   * The `@using Store.Counter` line is needed to identify the `CounterState` class.
+   * The `@using Store.Counter.IncrementCounter` line is needed to identify the `IncrementCounterAction` class.
    * The `@inject IStore Store` line instructs Blazor to inject the `Store` instance so we can dispatch actions to it.
 4. Change the `IncrementCount` function to dispatch an action to the store instructing it to increment the counter value.
 ```

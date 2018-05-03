@@ -21,7 +21,7 @@ namespace Blazor.Fluxor
 			FeaturesByName.Add(feature.GetName(), feature);
 		}
 
-		public async Task Dispatch<TAction>(TAction action)
+		public async Task DispatchAsync<TAction>(TAction action)
 			where TAction : IAction
 		{
 			if (action == null)

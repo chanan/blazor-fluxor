@@ -1,7 +1,7 @@
 ﻿@page "/counter"
 @using Blazor.Fluxor
-@using CounterSample.Client.Store.Counter
-@using CounterSample.Client.Store.Counter.IncrementCounter
+@using Store.Counter
+@using Store.Counter.IncrementCounter
 @inject IStore Store
 @inject IFeature<CounterState> Feature
 
@@ -14,9 +14,8 @@
 <button class="btn btn-primary" onclick="@IncrementCount">Click me</button>
 
 @functions {
-
-async void IncrementCount()
-{
-    await Store.Dispatch(new IncrementCounterAction());
-}
+   async void IncrementCount()
+   {
+       await Store.DispatchAsync(new IncrementCounterAction());
+   }
 }

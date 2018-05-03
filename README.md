@@ -17,6 +17,10 @@ More sample projects will be added as the framework develops.
   - [Effects sample] - Fluxorizes `FetchData` page in the standard Visual Studio Blazor sample in order to demonstrate asynchronous reactions to actions that are dispatched.
   - [Redux dev tools integration] - Demonstrates how to enable debugger integration for the [Redux dev tools] Chrome plugin.
 
+### New in 0.0.6
+  - Changed the signature of IStore.Dispatch to IStore.DispatchAsync
+  - Upgraded to latest version of Blazor (0.3.0)
+
 ### New in 0.0.5
   - Changed the signature of ServiceCollection.AddFluxor to pass in an Options object
   - Added support for Redux Dev Tools

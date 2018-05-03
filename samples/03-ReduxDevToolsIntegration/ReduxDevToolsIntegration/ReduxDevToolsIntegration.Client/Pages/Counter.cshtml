@@ -1,10 +1,10 @@
 ﻿@page "/counter"
 @inherits Blazor.Fluxor.Temporary.FluxorComponent
 @using Blazor.Fluxor
-@using ReduxDevToolsIntegration.Client.Store.Counter
-@using ReduxDevToolsIntegration.Client.Store.Counter.IncrementCounter
-@inject IFeature<CounterState> Feature
+@using Store.Counter
+@using Store.Counter.IncrementCounter
 @inject IStore Store
+@inject IFeature<CounterState> Feature
 
 <h1>Counter</h1>
 
@@ -12,11 +12,11 @@
 
 <p>Current count: @Feature.State.Value</p>
 
-<button onclick="@IncrementCount">Click me</button>
+<button class="btn btn-primary" onclick="@IncrementCount">Click me</button>
 
 @functions {
-async void IncrementCount()
-{
-    await Store.Dispatch(new IncrementCounterAction());
-}
+   async void IncrementCount()
+   {
+       await Store.DispatchAsync(new IncrementCounterAction());
+   }
 }

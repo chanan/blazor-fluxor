@@ -3,17 +3,36 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <OutputType>Exe</OutputType>
+    <LangVersion>7.3</LangVersion>
+
+    <!-- Temporary workaround for a VS build issue -->
+    <BlazorRebuildOnFileChange>false</BlazorRebuildOnFileChange>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.1.0-preview2-final" PrivateAssets="all" />
-    <PackageReference Include="Microsoft.AspNetCore.Blazor.Browser" Version="0.2.1" />
-    <PackageReference Include="Microsoft.AspNetCore.Blazor.Build" Version="0.2.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Blazor.Browser" Version="0.3.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Blazor.Build" Version="0.3.0" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\..\src\Blazor.Fluxor\Blazor.Fluxor.csproj" />
     <ProjectReference Include="..\ReduxDevToolsIntegration.Shared\ReduxDevToolsIntegration.Shared.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Update="Pages\Counter.cshtml">
+      <CopyToPublishDirectory>Never</CopyToPublishDirectory>
+      <Generator>MSBuild:BlazorGenerateDeclaration</Generator>
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Update="Pages\FetchData.cshtml">
+      <CopyToPublishDirectory>Never</CopyToPublishDirectory>
+      <Generator>MSBuild:BlazorGenerateDeclaration</Generator>
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
   </ItemGroup>
 
 </Project>

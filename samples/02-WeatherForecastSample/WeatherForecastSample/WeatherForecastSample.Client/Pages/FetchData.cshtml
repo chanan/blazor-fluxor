@@ -20,7 +20,7 @@
 
 @if (Feature.State.IsLoading)
 {
-    <p><strong>There is a 2 second delay on the server just so you can see this loading message!</strong></p>
+    <p>Loading...(2 second delay on server side)</p>
 }
 @if (Feature.State.Forecasts != null)
 {
@@ -51,6 +51,6 @@
 @functions {
 protected override async Task OnInitAsync()
 {
-    await Store.Dispatch(new GetForecastDataAction());
+    await Store.DispatchAsync(new GetForecastDataAction());
 }
 }

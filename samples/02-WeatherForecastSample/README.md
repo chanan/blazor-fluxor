@@ -104,6 +104,7 @@ We now need to change the rest of the page in the following ways
 }
 ```
 5. Change any occurrences of `forecasts` to `Feature.State.Forecasts`. There are two of them, one in an `@if` statement which shows/hides the table, and one in a `@foreach` statement that loops through the data.
+6. Remove the `else` statement and change it to `if (Feature.State.Forecasts != null)`.
 
 ## Dispatching the action when the page loads
 The code at the bottom of the `FetchData.cshtml` page calls out to a server. We want to move this code out to an effect that is triggered by the `GetForecastDataAction`. So we need to change the code in the `OnInitAsync` method to the following
